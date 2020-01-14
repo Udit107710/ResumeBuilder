@@ -122,8 +122,4 @@ STATIC_URL = '/static/'
 
 # AWS S3 Config
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_ACCESS_KEY_ID = ' AKIAWNEXKXAHCWHZ3OQE'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'resume-templates-intern'
-
 
