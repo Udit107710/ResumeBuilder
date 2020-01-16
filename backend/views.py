@@ -23,3 +23,9 @@ class ResumeList(APIView):
         print(data)
         return Response(data=data, status=HTTP_200_OK, content_type="application/json")
 
+
+class Home(APIView):
+
+    def get(self, request):
+        return Response(data={"working": "yes"}, status=HTTP_200_OK, content_type="application/json" )
+
