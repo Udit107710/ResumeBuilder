@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 import json
@@ -21,7 +20,6 @@ class ResumeList(APIView):
         for resume in resumes:
             files.append(url + resume.file.name)
         result = {'files': files}
-        response = json.dumps(result)
-        print(response)
-        return Response(data=response, status=HTTP_200_OK, content_type="application/json")
+        data = json.dumps(result)
+        return Response(data=data, status=HTTP_200_OK, content_type="application/json")
 
