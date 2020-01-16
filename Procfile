@@ -1,2 +1,2 @@
 release: python manage.py makemigrations --no-input
-web: gunicorn ResumeBuilder.wsgi
+web: python manage.py runserver 0.0.0.0:$PORT
