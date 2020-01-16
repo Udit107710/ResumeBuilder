@@ -8,7 +8,7 @@ import json
 from ResumeBuilder.settings import AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME
 from backend.models import Resume
 
-url ="https://"+AWS_STORAGE_BUCKET_NAME+".s3"+AWS_S3_REGION_NAME+".amazonaws.com/"
+url = "https://"+AWS_STORAGE_BUCKET_NAME+".s3."+AWS_S3_REGION_NAME+".amazonaws.com/"
 
 
 class ResumeList(APIView):
@@ -19,7 +19,7 @@ class ResumeList(APIView):
         files = []
         for resume in resumes:
             files.append(url + resume.file.name)
-        result = {'files': files}
-        data = json.dumps(result)
+        data = json.dumps({'files': files})
+        print(data)
         return Response(data=data, status=HTTP_200_OK, content_type="application/json")
 
