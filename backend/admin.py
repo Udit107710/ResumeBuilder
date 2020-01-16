@@ -1,4 +1,3 @@
 from django.contrib import admin
-from .models import Photo
-
-admin.site.register(Photo)
+from .models import Resume
+admin.site.register(Resume)
