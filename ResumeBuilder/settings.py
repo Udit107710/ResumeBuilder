@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # For TokenAuth
+    'rest_framework',
     'rest_framework.authtoken',
     # For AWS
     'storages',
