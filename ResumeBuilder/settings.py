@@ -25,10 +25,10 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["https://resume-builder-v1.herokuapp.com"]
-Access_Control_Allow_Credentials = True
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-    'https://udit107710.github.io'
+    'https://udit107710.github.io',
+    'https://fervent-bardeen-8effd0.netlify.com'
 )
 
 # Application definition
