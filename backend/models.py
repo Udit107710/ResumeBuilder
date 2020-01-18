@@ -8,4 +8,4 @@ class Resume(models.Model):
 class Profile(models.Model):
     name = models.CharField(max_length=20)
     email = models.EmailField()
-    template = models.URLField(max_length=200)
+    template = models.CharField(max_length=200)

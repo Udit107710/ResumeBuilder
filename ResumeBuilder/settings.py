@@ -26,10 +26,6 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["resume-builder-v1.herokuapp.com", "127.0.0.1"]
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = (
-#     'https://udit107710.github.io',
-#     'https://fervent-bardeen-8effd0.netlify.com'
-# )
 
 # Application definition
 
@@ -153,3 +149,9 @@ AWS_DEFAULT_ACL = None
 
 DATABASES['default'] = dj_database_url.config(
     default="postgres://frontend:frontend@localhost:5432/resume-builder", conn_max_age=600)
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587

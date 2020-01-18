@@ -1,16 +1,16 @@
 from django.shortcuts import render, HttpResponse
-from django.core.mail import send_mail
 from django.http import FileResponse
+from django.core.mail import EmailMessage
 
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_500_INTERNAL_SERVER_ERROR
 import json
 
 from ResumeBuilder.settings import AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME
 from backend.models import Resume
-from backend.forms import ProfileForm
+from backend.serializers import ProfileSerializer
 
 url = "https://"+AWS_STORAGE_BUCKET_NAME+".s3."+AWS_S3_REGION_NAME+".amazonaws.com/"
 
@@ -37,15 +37,29 @@ class Home(APIView):
 
 
 class SendResume(APIView):
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        profile = ProfileForm(request.POST)
+        print(request.data)
+        profile = ProfileSerializer(data=request.data)
         if profile.is_valid():
             profile.save()
-            data = json.dumps({"email": "successful"})
-            resume = Resume.objects.get(file=profile["template"])
-            
-            return FileResponse(open(resume.file))
+            file = "Resumes/" + profile["template"].value
+            resume = Resume.objects.get(file=file)
+            email = EmailMessage(
+                'Resume',
+                'Your resume is ready',
+                'uditcr710107@gmail.com',
+                [profile["email"].value]
+            )
+            email.attach('resume.pdf', resume.file.read(), "application/pdf")
+            email.send()
+
+            data = json.dumps({"email": "successful", "resume": url+file})
+            print(data)
+            return Response(data=data, status=HTTP_200_OK, content_type="application/json")
         else:
             print(profile.errors)
-            return HttpResponse()
+            data = json.dumps({"error": "yes"})
+            print(data)
+            return Response(data=data, status=HTTP_500_INTERNAL_SERVER_ERROR, content_type="application/json")
