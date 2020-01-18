@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = ["resume-builder-v1.herokuapp.com", "127.0.0.1"]
 CORS_ORIGIN_ALLOW_ALL = True
