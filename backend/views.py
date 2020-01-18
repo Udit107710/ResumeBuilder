@@ -60,6 +60,6 @@ class SendResume(APIView):
             return Response(data=data, status=HTTP_200_OK, content_type="application/json")
         else:
             print(profile.errors)
-            data = json.dumps({"error": "yes"})
+            data = json.dumps({"email": "unsuccessful", "resume": ""})
             print(data)
             return Response(data=data, status=HTTP_500_INTERNAL_SERVER_ERROR, content_type="application/json")
